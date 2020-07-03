@@ -53,7 +53,7 @@ const Peer = window.Peer;
       addMessage('=== You joined ===');
     });
     room.on('peerJoin', peerId => {
-      addMessage(`=== ${userName} joined ===`);
+      addMessage(`=== ${peerId} joined ===`);
     });
 
     // Render remote stream for new peer join in the room
@@ -69,7 +69,7 @@ const Peer = window.Peer;
 
     room.on('data', ({ data, src }) => {
       // Show a message sent to the room and who sent
-      addMessage(`${src}: ${data}`);
+      addMessage(`${data}`);
     });
 
     // for closing room members

@@ -18,7 +18,11 @@ input:focus {
 }
 
 .login-form {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
+  color: rgb(230,230,230)
 }
 
 .login-display .login-form {
@@ -39,7 +43,8 @@ input:focus {
   width: 100%;
 }
 
-.remote-streams {
+.remote-streams,
+.local-streams {
   flex-grow: 1;
   min-width: 0;
   background: rgb(40, 40, 40);
@@ -49,10 +54,16 @@ input:focus {
   width: 100%;
 }
 
+.local-streams video {
+  display: block;
+  margin: auto;
+  width: 500px;
+}
+
 .chat-area {
   display: flex;
   flex-direction: column;
-  flex-basis: 250px;
+  flex-basis: 300px;
   flex-shrink: 0;
 }
 
@@ -75,3 +86,4 @@ input:focus {
   text-align: center;
   padding: 5px 0 10px;
 }
+
