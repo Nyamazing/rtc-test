@@ -2,7 +2,7 @@ const Peer = window.Peer;
 
 (async function main() {
   const joinTrigger = document.getElementById('js-join-trigger');
-  const leaveTrigger = document.getElementById('js-leave-trigger');
+  // const leaveTrigger = document.getElementById('js-leave-trigger');
   const remoteVideos = document.getElementById('js-remote-streams');
   const roomIdForm = document.getElementById('js-room-id');
   const userNameForm = document.getElementById('user-name');
@@ -110,7 +110,7 @@ const Peer = window.Peer;
       addMessage(`${userName}: ${localText.value}`);
       localText.value = '';
     });
-    leaveTrigger.addEventListener('click', () => room.close(), { once: true });
+    // leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket
