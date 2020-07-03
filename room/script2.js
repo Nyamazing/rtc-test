@@ -14,16 +14,23 @@ const Peer = window.Peer;
 
   joinTrigger.setAttribute('disabled', true);
 
-  const localStream = await navigator.mediaDevices
+  const audioStream = await navigator.mediaDevices.getUserMedia({
+    video: false,
+    audio: true,
+  });
+
+  const videoStream = await navigator.mediaDevices
     .getDisplayMedia({
-      audio: true,
       video: true,
+      audio: false,
     })
     .catch(console.error);
 
+  const combinedStream = new MediaStream([...videoStream.getTracks(), ...audioStream.getTracks()])
+
   // Render local stream
   localVideo.muted = false;
-  localVideo.srcObject = localStream;
+  localVideo.srcObject = videoStream;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
 
@@ -72,7 +79,7 @@ const Peer = window.Peer;
 
     const room = peer.joinRoom(roomId, {
       mode: 'mesh',
-      stream: localStream,
+      stream: combinedStream,
     });
 
     const container = document.getElementById('container');
