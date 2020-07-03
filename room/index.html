@@ -4,37 +4,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SkyWay - Room example</title>
-  <link rel="stylesheet" href="../shared/style.css">
+  <title>ンジャメナ</title>
+
+  <style>
+    html {
+      background: rgb(30, 30, 30);
+    }
+
+    body {
+      margin: 0;
+    }
+
+    input:focus {
+      outline: none;
+      outline-offset: none;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .login-form {
+      text-align: center;
+    }
+
+    .login-display .login-form {
+      display: block;
+    }
+
+    .login-display .room {
+      display: none;
+    }
+
+    .room-display .login-form {
+      display: none;
+    }
+
+    .room-display .room {
+      display: flex;
+
+      width: 100%;
+    }
+
+    .remote-streams {
+      flex-grow: 1;
+
+      background: rgb(40, 40, 40);
+    }
+
+    .chat-area {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 250px;
+    }
+
+    .messages {
+      flex-grow: 1;
+
+      color: white;
+    }
+
+    .messages p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .messages p:nth-of-type(even) {
+      background: rgb(40, 40, 40);
+    }
+
+    .chat-controller {
+      text-align: center;
+      padding: 5px 0 10px;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1 class="heading">Room example</h1>
-    <p class="note">
-      Change Room mode (before join in a room):
-      <a href="#">mesh</a> / <a href="#sfu">sfu</a>
-    </p>
+  <div class="container room-display">
+
+
+    <div id="login" class="login-form">
+      <h1 class="heading">ンジャメナ</h1>
+      <input type="text" placeholder="Room Name" id="js-room-id">
+      <input type="text" placeholder="Your Name" id="user-name">
+      <button id="js-join-trigger">Join</button>
+
+    </div>
+
     <div class="room">
-      <div>
-        <video id="js-local-stream"></video>
-        <span id="js-room-mode"></span>:
-        <input type="text" placeholder="Room Name" id="js-room-id">
-        <button id="js-join-trigger">Join</button>
-        <button id="js-leave-trigger">Leave</button>
-      </div>
 
       <div class="remote-streams" id="js-remote-streams"></div>
 
-      <div>
-        <pre class="messages" id="js-messages"></pre>
-        <input type="text" id="js-local-text">
-        <button id="js-send-trigger">Send</button>
+      <div class="chat-area">
+        <div class="messages" id="js-messages"></div>
+        <div class="chat-controller">
+          <input type="text" id="js-local-text">
+          <button id="js-send-trigger">Send</button>
+        </div>
+        <!-- button id="js-leave-trigger">Leave</button -->
       </div>
     </div>
-    <p class="meta" id="js-meta"></p>
   </div>
-  <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+
   <script src="../shared/key.js"></script>
   <script src="./script.js"></script>
 </body>

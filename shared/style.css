@@ -16,17 +16,6 @@ video {
   text-align: center;
 }
 
-.meta {
-  text-align: center;
-  font-size: .8rem;
-  color: gray;
-}
-
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  width: 980px;
-}
 
 /* p2p-media styles */
 .p2p-media {
@@ -57,21 +46,6 @@ video {
   margin-top: 0;
 }
 
-/* room */
-.room {
-  display: grid;
-  grid-template-columns: 30% 40% 30%;
-  gap: 8px;
-  margin: 0 8px;
-}
 
-.room .remote-streams {
-  background-color: #f6fbff;
-}
 
-.room .messages {
-  background-color: #eee;
-  min-height: 100px;
-  padding: 8px;
-  margin-top: 0;
-}
+

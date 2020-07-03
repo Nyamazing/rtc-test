@@ -6,25 +6,10 @@ const Peer = window.Peer;
   const leaveTrigger = document.getElementById('js-leave-trigger');
   const remoteVideos = document.getElementById('js-remote-streams');
   const roomId = document.getElementById('js-room-id');
-  const roomMode = document.getElementById('js-room-mode');
   const localText = document.getElementById('js-local-text');
   const sendTrigger = document.getElementById('js-send-trigger');
   const messages = document.getElementById('js-messages');
-  const meta = document.getElementById('js-meta');
-  const sdkSrc = document.querySelector('script[src*=skyway]');
 
-  meta.innerText = `
-    UA: ${navigator.userAgent}
-    SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
-  `.trim();
-
-  const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
-
-  roomMode.textContent = getRoomModeByHash();
-  window.addEventListener(
-    'hashchange',
-    () => (roomMode.textContent = getRoomModeByHash())
-  );
 
   const localStream = await navigator.mediaDevices
     .getDisplayMedia({
@@ -54,7 +39,7 @@ const Peer = window.Peer;
     }
 
     const room = peer.joinRoom(roomId.value, {
-      mode: getRoomModeByHash(),
+      mode: 'mesh',
       stream: localStream,
     });
 
