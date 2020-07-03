@@ -22,7 +22,7 @@ input:focus {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  color: rgb(230,230,230)
+  color: rgb(230,230,230);
 }
 
 .login-display .login-form {
@@ -70,7 +70,7 @@ input:focus {
 .messages {
   flex-grow: 1;
 
-  color: white;
+  color: rgb(230,230,230);
 }
 
 .messages p {
