@@ -3,7 +3,7 @@ const Peer = window.Peer;
 (async function main() {
   const localVideo = document.getElementById('js-local-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
-  // const leaveTrigger = document.getElementById('js-leave-trigger');
+  const leaveTrigger = document.getElementById('js-leave-trigger');
   const sendMessageForm = document.getElementById('send-message-form');
   const remoteVideos = document.getElementById('js-remote-streams');
   const roomIdForm = document.getElementById('js-room-id');
@@ -22,7 +22,7 @@ const Peer = window.Peer;
     .catch(console.error);
 
   // Render local stream
-  localVideo.muted = true;
+  localVideo.muted = false;
   localVideo.srcObject = localStream;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
@@ -125,15 +125,8 @@ const Peer = window.Peer;
       });
     });
 
-    // sendTrigger.addEventListener('click', onClickSend);
+    sendTrigger.addEventListener('click', onClickSend);
     sendMessageForm.addEventListener('submit', onClickSend);
-    /*localText.addEventListener('keyup', e => {
-      if (e.keyCode !== 13) return;
-      room.send(`${userName}: ${localText.value}`);
-      addMessage(`${userName}: ${localText.value}`);
-      localText.value = '';
-    });*/
-    // leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
     function onClickSend(e) {
       e.preventDefault();

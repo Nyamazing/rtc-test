@@ -74,10 +74,12 @@ const Peer = window.Peer;
     // Render remote stream for new peer join in the room
     room.on('stream', async stream => {
       const newVideo = document.createElement('video');
+      newVideo.setAttribute('controls', true);
       newVideo.srcObject = stream;
       newVideo.playsInline = true;
       // mark peerId to find it later at peerLeave event
       newVideo.setAttribute('data-peer-id', stream.peerId);
+      remoteVideos.innerHTML = '';
       remoteVideos.append(newVideo);
       await newVideo.play().catch(console.error);
     });
