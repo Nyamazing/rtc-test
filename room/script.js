@@ -1,7 +1,7 @@
 const Peer = window.Peer;
 
 (async function main() {
-  const localVideo = document.getElementById('js-local-stream');
+  // const localVideo = document.getElementById('js-local-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
   const leaveTrigger = document.getElementById('js-leave-trigger');
   const remoteVideos = document.getElementById('js-remote-streams');
@@ -26,18 +26,18 @@ const Peer = window.Peer;
     () => (roomMode.textContent = getRoomModeByHash())
   );
 
-  const localStream = await navigator.mediaDevices
+  /*const localStream = await navigator.mediaDevices
     .getUserMedia({
       // audio: true,
       // video: true,
     })
-    .catch(console.error);
+    .catch(console.error);*/
 
   // Render local stream
-  localVideo.muted = true;
+  /*localVideo.muted = true;
   localVideo.srcObject = localStream;
   localVideo.playsInline = true;
-  await localVideo.play().catch(console.error);
+  await localVideo.play().catch(console.error);*/
 
   // eslint-disable-next-line require-atomic-updates
   const peer = (window.peer = new Peer({
@@ -55,7 +55,7 @@ const Peer = window.Peer;
 
     const room = peer.joinRoom(roomId.value, {
       mode: getRoomModeByHash(),
-      stream: localStream,
+      // stream: localStream,
     });
 
     room.once('open', () => {
@@ -83,12 +83,12 @@ const Peer = window.Peer;
 
     // for closing room members
     room.on('peerLeave', peerId => {
-      const remoteVideo = remoteVideos.querySelector(
+      /*const remoteVideo = remoteVideos.querySelector(
         `[data-peer-id="${peerId}"]`
       );
       remoteVideo.srcObject.getTracks().forEach(track => track.stop());
       remoteVideo.srcObject = null;
-      remoteVideo.remove();
+      remoteVideo.remove();*/
 
       messages.textContent += `=== ${peerId} left ===\n`;
     });
