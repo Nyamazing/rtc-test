@@ -25,10 +25,24 @@ const Peer = window.Peer;
   roomIdForm.addEventListener('input', enableLogin);
   userNameForm.addEventListener('input', enableLogin);
 
+  const isBottom = () => {
+    const clientHeight = messages.clientHeight;
+    const scrollTop = messages.scrollTop;
+    const scrollHeight = messages.scrollHeight;
+    return clientHeight + scrollTop === scrollHeight;
+  };
+  const toScrollBottom = () => {
+    messages.scrollTop = messages.scrollHeight;
+  };
+
   const addMessage = text => {
+    const bottom = isBottom();
     const message = document.createElement('p');
     message.textContent = text;
     messages.append(message);
+    if (bottom) {
+      toScrollBottom();
+    }
   };
 
   // Register join handler
@@ -90,12 +104,17 @@ const Peer = window.Peer;
     });
 
     sendTrigger.addEventListener('click', onClickSend);
+    localText.addEventListener('keyup', e => {
+      if (e.keyCode !== 13) return;
+      room.send(`${userName}: ${localText.value}`);
+      addMessage(`${userName}: ${localText.value}`);
+      localText.value = '';
+    });
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket
       room.send(`${userName}: ${localText.value}`);
-
       addMessage(`${userName}: ${localText.value}`);
       localText.value = '';
     }

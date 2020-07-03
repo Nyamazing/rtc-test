@@ -111,6 +111,12 @@ const Peer = window.Peer;
     });
 
     sendTrigger.addEventListener('click', onClickSend);
+    localText.addEventListener('keyup', e => {
+      if (e.keyCode !== 13) return;
+      room.send(`${userName}: ${localText.value}`);
+      addMessage(`${userName}: ${localText.value}`);
+      localText.value = '';
+    });
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
     function onClickSend() {
