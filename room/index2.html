@@ -9,22 +9,27 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1 class="heading">ンジャメナ</h1>
+  <div id="container" class="container login-display">
+
+    <div id="login" class="login-form">
+      <h1 class="heading">ンジャメナ</h1>
+      <input type="text" placeholder="Room Name" id="js-room-id">
+      <input type="text" placeholder="Your Name" id="user-name">
+      <button id="js-join-trigger">Join</button>
+    </div>
+
     <div class="room">
-      <div>
+      <div class="local-streams">
         <video id="js-local-stream"></video>
-        <input type="text" placeholder="Room Name" id="js-room-id">
-        <button id="js-join-trigger">Join</button>
-        <button id="js-leave-trigger">Leave</button>
       </div>
 
-      <div class="remote-streams" id="js-remote-streams"></div>
-
-      <div>
-        <pre class="messages" id="js-messages"></pre>
-        <input type="text" id="js-local-text">
-        <button id="js-send-trigger">Send</button>
+      <div class="chat-area">
+        <div class="messages" id="js-messages"></div>
+        <div class="chat-controller">
+          <input type="text" id="js-local-text">
+          <button id="js-send-trigger">Send</button>
+        </div>
+        <!-- button id="js-leave-trigger">Leave</button -->
       </div>
     </div>
   </div>

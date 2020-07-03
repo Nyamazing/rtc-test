@@ -5,96 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ンジャメナ</title>
-
-  <style>
-    html {
-      background: rgb(30, 30, 30);
-    }
-
-    body {
-      margin: 0;
-    }
-
-    input:focus {
-      outline: none;
-      outline-offset: none;
-    }
-
-    .container {
-      display: flex;
-      height: 100vh;
-    }
-
-    .login-form {
-      text-align: center;
-    }
-
-    .login-display .login-form {
-      display: block;
-    }
-
-    .login-display .room {
-      display: none;
-    }
-
-    .room-display .login-form {
-      display: none;
-    }
-
-    .room-display .room {
-      display: flex;
-
-      width: 100%;
-    }
-
-    .remote-streams {
-      flex-grow: 1;
-
-      background: rgb(40, 40, 40);
-    }
-
-    .chat-area {
-      display: flex;
-      flex-direction: column;
-      flex-basis: 250px;
-    }
-
-    .messages {
-      flex-grow: 1;
-
-      color: white;
-    }
-
-    .messages p {
-      margin: 0;
-      padding: 0;
-    }
-
-    .messages p:nth-of-type(even) {
-      background: rgb(40, 40, 40);
-    }
-
-    .chat-controller {
-      text-align: center;
-      padding: 5px 0 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="../shared/style.css">
 </head>
 
 <body>
-  <div class="container login-display">
-
+  <div id="container" class="container login-display">
 
     <div id="login" class="login-form">
       <h1 class="heading">ンジャメナ</h1>
       <input type="text" placeholder="Room Name" id="js-room-id">
       <input type="text" placeholder="Your Name" id="user-name">
       <button id="js-join-trigger">Join</button>
-
     </div>
 
     <div class="room">
-
       <div class="remote-streams" id="js-remote-streams"></div>
 
       <div class="chat-area">

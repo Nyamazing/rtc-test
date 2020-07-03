@@ -1,51 +1,77 @@
-/* normalize */
-body { margin: 0; }
 
-/* global styles */
-video {
-  background-color: #111;
+html {
+  background: rgb(30, 30, 30);
+}
+
+body {
+  margin: 0;
+}
+
+input:focus {
+  outline: none;
+  outline-offset: none;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.login-form {
+  text-align: center;
+}
+
+.login-display .login-form {
+  display: block;
+}
+
+.login-display .room {
+  display: none;
+}
+
+.room-display .login-form {
+  display: none;
+}
+
+.room-display .room {
+  display: flex;
+
   width: 100%;
 }
 
-.heading {
-  text-align: center;
-  margin-bottom: 0;
+.remote-streams {
+  flex-grow: 1;
+  min-width: 0;
+  background: rgb(40, 40, 40);
 }
 
-.note {
-  text-align: center;
+.remote-streams video {
+  width: 100%;
 }
 
-
-/* p2p-media styles */
-.p2p-media {
+.chat-area {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  flex-basis: 250px;
+  flex-shrink: 0;
 }
 
-.p2p-media .remote-stream {
-  width: 50%;
+.messages {
+  flex-grow: 1;
+
+  color: white;
 }
 
-.p2p-media .local-stream {
-  width: 30%;
+.messages p {
+  margin: 0;
+  padding: 0;
 }
 
-/* p2p-data styles */
-.p2p-data {
-  display: grid;
-  grid-template-columns: 30% 1fr;
-  margin: 0 8px;
+.messages p:nth-of-type(even) {
+  background: rgb(40, 40, 40);
 }
 
-.p2p-data .messages {
-  background-color: #eee;
-  min-height: 100px;
-  padding: 8px;
-  margin-top: 0;
+.chat-controller {
+  text-align: center;
+  padding: 5px 0 10px;
 }
-
-
-
-

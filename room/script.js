@@ -4,27 +4,26 @@ const Peer = window.Peer;
   const joinTrigger = document.getElementById('js-join-trigger');
   const leaveTrigger = document.getElementById('js-leave-trigger');
   const remoteVideos = document.getElementById('js-remote-streams');
-  const roomId = document.getElementById('js-room-id');
-  const userName = document.getElementById('user-name');
+  const roomIdForm = document.getElementById('js-room-id');
+  const userNameForm = document.getElementById('user-name');
   const localText = document.getElementById('js-local-text');
   const sendTrigger = document.getElementById('js-send-trigger');
   const messages = document.getElementById('js-messages');
 
   joinTrigger.setAttribute('disabled', true);
 
-  // eslint-disable-next-line require-atomic-updates
   const peer = (window.peer = new Peer({
     key: window.__SKYWAY_KEY__,
     debug: 3,
   }));
 
   const enableLogin = () => {
-    if (roomId.value === undefined || roomId.value === '' || userName.value === undefined || userName.value === '') return;
+    if (roomIdForm.value === undefined || roomIdForm.value === '' || userNameForm.value === undefined || userNameForm.value === '') return;
     joinTrigger.removeAttribute('disabled');
   };
 
-  roomId.addEventListener('input', enableLogin);
-  userName.addEventListener('input', enableLogin);
+  roomIdForm.addEventListener('input', enableLogin);
+  userNameForm.addEventListener('input', enableLogin);
 
   const addMessage = text => {
     const message = document.createElement('p');
@@ -36,12 +35,19 @@ const Peer = window.Peer;
   joinTrigger.addEventListener('click', () => {
     // Note that you need to ensure the peer has connected to signaling server
     // before using methods of peer instance.
-    if (roomId.value === undefined || roomId.value === '' || userName.value === undefined || userName.value === '') return;
+    if (roomIdForm.value === undefined || roomIdForm.value === '' || userNameForm.value === undefined || userNameForm.value === '') return;
     if (!peer.open) return;
 
-    const room = peer.joinRoom(roomId.value, {
+    const roomId = roomIdForm.value;
+    const userName = userNameForm.value;
+
+    const room = peer.joinRoom(roomId, {
       mode: 'mesh',
     });
+
+    const container = document.getElementById('container');
+    container.classList.add('room-display');
+    container.classList.remove('login-display');
 
     room.once('open', () => {
       addMessage('=== You joined ===');
