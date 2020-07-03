@@ -3,6 +3,7 @@ const Peer = window.Peer;
 (async function main() {
   const joinTrigger = document.getElementById('js-join-trigger');
   // const leaveTrigger = document.getElementById('js-leave-trigger');
+  const sendMessageForm = document.getElementById('send-message-form');
   const remoteVideos = document.getElementById('js-remote-streams');
   const roomIdForm = document.getElementById('js-room-id');
   const userNameForm = document.getElementById('user-name');
@@ -103,16 +104,18 @@ const Peer = window.Peer;
       });
     });
 
-    sendTrigger.addEventListener('click', onClickSend);
-    localText.addEventListener('keyup', e => {
+    // sendTrigger.addEventListener('click', onClickSend);
+    sendMessageForm.addEventListener('submit', onClickSend);
+    /*localText.addEventListener('keyup', e => {
       if (e.keyCode !== 13) return;
       room.send(`${userName}: ${localText.value}`);
       addMessage(`${userName}: ${localText.value}`);
       localText.value = '';
-    });
+    });*/
     // leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
-    function onClickSend() {
+    function onClickSend(e) {
+      e.preventDefault();
       // Send message to all of the peers in the room via websocket
       room.send(`${userName}: ${localText.value}`);
       addMessage(`${userName}: ${localText.value}`);
