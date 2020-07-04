@@ -30,7 +30,7 @@ const Peer = window.Peer;
     const clientHeight = messages.clientHeight;
     const scrollTop = messages.scrollTop;
     const scrollHeight = messages.scrollHeight;
-    return clientHeight + scrollTop === scrollHeight;
+    return scrollHeight < clientHeight + scrollTop + 10;
   };
   const toScrollBottom = () => {
     messages.scrollTop = messages.scrollHeight;
@@ -106,18 +106,11 @@ const Peer = window.Peer;
       });
     });
 
-    // sendTrigger.addEventListener('click', onClickSend);
     sendMessageForm.addEventListener('submit', onClickSend);
-    /*localText.addEventListener('keyup', e => {
-      if (e.keyCode !== 13) return;
-      room.send(`${userName}: ${localText.value}`);
-      addMessage(`${userName}: ${localText.value}`);
-      localText.value = '';
-    });*/
-    // leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
     function onClickSend(e) {
       e.preventDefault();
+      if (localText.value === undefined || localText.value === '') return;
       // Send message to all of the peers in the room via websocket
       room.send(`${userName}: ${localText.value}`);
       addMessage(`${userName}: ${localText.value}`);

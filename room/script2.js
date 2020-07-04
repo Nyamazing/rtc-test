@@ -19,11 +19,15 @@ const Peer = window.Peer;
     audio: true,
   });
 
-  const videoStream = await navigator.mediaDevices
-    .getDisplayMedia({
-      video: true,
-      audio: false,
-    })
+  const videoStream = await navigator.mediaDevices.getDisplayMedia({
+    video: {
+      enable: true,
+      frameRate: { ideal: 10, max: 15 },
+      width: { max: 1920 },
+      height: { max: 1080 },
+    },
+    audio: { enable: false },
+  })
     .catch(console.error);
 
   const combinedStream = new MediaStream([...videoStream.getTracks(), ...audioStream.getTracks()])
@@ -51,7 +55,7 @@ const Peer = window.Peer;
     const clientHeight = messages.clientHeight;
     const scrollTop = messages.scrollTop;
     const scrollHeight = messages.scrollHeight;
-    return clientHeight + scrollTop === scrollHeight;
+    return scrollHeight < clientHeight + scrollTop + 10;
   };
   const toScrollBottom = () => {
     messages.scrollTop = messages.scrollHeight;
@@ -132,11 +136,11 @@ const Peer = window.Peer;
       });
     });
 
-    sendTrigger.addEventListener('click', onClickSend);
     sendMessageForm.addEventListener('submit', onClickSend);
 
     function onClickSend(e) {
       e.preventDefault();
+      if (localText.value === undefined || localText.value === '') return;
       // Send message to all of the peers in the room via websocket
       room.send(`${userName}: ${localText.value}`);
 
